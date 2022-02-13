@@ -1,6 +1,6 @@
 
 to run app
-- python3 app.py
+- python app.py
 
 save new packages
 - pip freeze > requirements.txt  

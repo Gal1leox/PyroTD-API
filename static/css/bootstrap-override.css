@@ -1,0 +1,44 @@
+:root {
+    --bs-primary-rgb: 0, 12, 26;
+    --input-primary-rgb: 10, 24, 52;
+    --btn-primary-rgb: 0, 12, 26;
+}
+
+.btn:hover {
+    color: white;
+}
+
+.btn-primary {
+    border: solid white 1px;
+    background-color: var(--btn-primary-rgb);
+}
+
+.dropdown-toggle {
+    color: white;
+    min-width: 7rem;
+}
+
+.dropdown-toggle:hover {
+    background-color: var(--btn-primary-rgb);
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.432);
+}
+
+.dropdown-toggle:focus {
+    color: white;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.432);
+}
+
+@media (max-width: 1400px) {
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .col-md-4 {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
