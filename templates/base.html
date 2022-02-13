@@ -10,10 +10,16 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-dark bg-primary">
+  <nav class="navbar sticky-top navbar-main">
     <div class="container">
-      <img src="{{url_for('static', filename='images/castle-logo.png')}}"/>
-        <h1>bob</h1>
+      <div class="logo-container">
+        <img src="{{url_for('static', filename='images/castle-logo.png')}}" class="logo"/>
+      </div>
+      <div class="navbar-links">
+        <div class="navbar-item">
+          <a class="navbar-link active" aria-current="page" href="#">Home</a>
+        </div>
+      </div>
     </div>
   </nav>
 

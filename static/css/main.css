@@ -1,6 +1,54 @@
+:root {
+    --color-bg-nav: #f5f5f5;
+    --color-bg-body: #F7F7F7;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: grey;
+    background-color: var(--color-bg-body);
+}
 
+img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
+.logo-container {
+    height: 75px;
+    width: 75px;
+}
+   
+.navbar-main {
+    background-color: var(--color-bg-nav);
+    border-bottom: 1px black solid;
+}
+
+.navbar-links {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar-link {
+    color: rgba(185, 182, 182, 0.664);
+    text-decoration: none;
+}
+
+.navbar-link {
+    border-bottom: 1px solid rgba(185, 182, 182, 0.664);
+    padding: 0.25rem;
+}
+
+.navbar-link:hover {
+    border-bottom: 1px solid rgba(99, 99, 99, 0.664);
+}
+
+.acitve {
+    color: rgb(5, 5, 5);
+    text-decoration: none;
 }
