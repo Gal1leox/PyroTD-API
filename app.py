@@ -13,7 +13,7 @@ import google.auth.transport.requests
 #import yaml
 
 app = Flask(__name__)
-app.secret_key = "mercerjosch@gmail.com"
+app.secret_key = "qq"
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
