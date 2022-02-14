@@ -8,7 +8,6 @@ views = Blueprint("views", __name__)
 def home ():
     return render_template('home.html')
 
-
-@views.route("/<usr>")
-def user (usr):
-    return f"<h1>{usr}</h1>"
+@views.route('/matches')
+def matches ():
+    return render_template('matches.html')
