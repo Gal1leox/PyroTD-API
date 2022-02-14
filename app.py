@@ -6,7 +6,6 @@ import requests
 from google.oauth2 import id_token
 from multiprocessing import AuthenticationError
 from flask import Flask, render_template, url_for, request, redirect, session, abort
-from flask_mysqldb import MySQL
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 import google.auth.transport.requests
