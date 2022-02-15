@@ -7,16 +7,34 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(150), unique=True)
     username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    user_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
 
 
 class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    winner = db.Column(db.String(150))
-    p1 = db.Column(db.String(150))
-    p2 = db.Column(db.String(150))
-    p3 = db.Column(db.String(150))
-    p4 = db.Column(db.String(150))
-    p5 = db.Column(db.String(150))
-    p6 = db.Column(db.String(150))
-    date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+    winner = db.Column(db.Integer)
+    p1_id = db.Column(db.Integer)
+    p2_id = db.Column(db.Integer)
+    p3_id = db.Column(db.Integer)
+    p4_id = db.Column(db.Integer)
+    p5_id = db.Column(db.Integer)
+    p6_id = db.Column(db.Integer)
+    p1_mmr = db.Column(db.Integer)
+    p2_mmr = db.Column(db.Integer)
+    p3_mmr = db.Column(db.Integer)
+    p4_mmr = db.Column(db.Integer)
+    p5_mmr = db.Column(db.Integer)
+    p6_mmr = db.Column(db.Integer)
+    t1_mmr = db.Column(db.Integer)
+    t2_mmr = db.Column(db.Integer)
+    match_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+
+
+
+class Player(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150))
+    mmr = db.Column(db.Integer)
+    wins = db.Column(db.Integer)
+    loss = db.Column(db.Integer)
+    
