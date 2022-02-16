@@ -42,23 +42,31 @@ def sign_up():
         #new user validation, email, username,password.
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
+        #for the people that can never remember their email address
         if email_exists:
             flash('This email already exists', category='error')
+
+        # for the people who like to make new accounts....
         elif username_exists:
             flash('Username in use.', category='error')
 
+        #for the people who cannot type the same thing twice
         elif password1 != password2:
             flash('password don\'t match', category='error')
         
+        #for the people who want 1 letter usernames
         elif len(username) < 2:
             flash('username is too short.', category='error')
 
+        #for the people that want 1 letter passwords
         elif len(password1) < 6:
             flash('Password too short.', category='error')
 
+        #for the people who submit fake email addresses
         elif len(email) < 4:
             flash('Email is invalid.', category='error')
 
+        # we like these people
         else:
             new_user = User(email=email, username=username, password=generate_password_hash(password1, method='sha256'))
             db.session.add(new_user)
