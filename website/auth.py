@@ -27,7 +27,7 @@ def login():
             flash('email doesnt exist', category='error')
 
 
-    return render_template ("Login.html")
+    return render_template ("Login.html", user=current_user)
 
 #Route for sign up
 #GET new user info
@@ -75,7 +75,7 @@ def sign_up():
             flash('User created')
             return redirect(url_for('views.home'))
 
-    return render_template ("sign_up.html")
+    return render_template ("sign_up.html", user=current_user)
 
 @auth.route("/logout")
 @login_required

@@ -12,6 +12,7 @@ class User(db.Model, UserMixin):
 
 class Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    host_id = db.Column(db.Integer)
     winner = db.Column(db.Integer)
     p1_id = db.Column(db.Integer)
     p2_id = db.Column(db.Integer)
@@ -27,6 +28,12 @@ class Match(db.Model):
     p6_mmr = db.Column(db.Integer)
     t1_mmr = db.Column(db.Integer)
     t2_mmr = db.Column(db.Integer)
+    p1_change = db.Column(db.Integer)
+    p2_change = db.Column(db.Integer)
+    p3_change = db.Column(db.Integer)
+    p4_change = db.Column(db.Integer)
+    p5_change = db.Column(db.Integer)
+    p6_change = db.Column(db.Integer)
     match_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
 
 
@@ -37,4 +44,5 @@ class Player(db.Model):
     mmr = db.Column(db.Integer)
     wins = db.Column(db.Integer)
     loss = db.Column(db.Integer)
+    icon_id = db.Column(db.Integer)
     
