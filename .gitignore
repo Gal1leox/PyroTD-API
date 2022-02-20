@@ -2,3 +2,4 @@ env/
 venv/
 db.yaml
 client_secret.json
+database.db
