@@ -24,12 +24,17 @@ def player():
         mmr = myPlayer.mmr
         wins = myPlayer.wins
         loss = myPlayer.loss
-        return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss,})
+        return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'existing_player'})
     else:
         new_player =Player(username=username, mmr=MMR, wins=0, loss=0)
         db.session.add(new_player)
         db.session.commit()
-        return jsonify ({'result' : 'new player created'})
+        myPlayer = Player.query.filter_by(username=username).first()
+        id = myPlayer.id
+        mmr = myPlayer.mmr
+        wins = myPlayer.wins
+        loss = myPlayer.loss
+        return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'new_player'})
  
 
 #matchload record, uses get_match model to great data

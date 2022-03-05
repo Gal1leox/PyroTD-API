@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
@@ -19,7 +19,7 @@ def create_app():
     
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/")
-    app.register_blueprint(apis, url_prefix="/")
+    app.register_blueprint(apis, url_prefix="/api/")
 
     from .models import User
 
@@ -46,10 +46,10 @@ def create_database(app):
 
 
 
-#  ______   _______   _
-# /  __  \ |  ___  | | |
-# | |  |_| | |___| | | | 
-# | | ___  |  ___  | | | 
-# | ||_  | | |   | | | | 
-# | |__| | | |   | | | |____  
-#  \_____/ |_|   |_| |______|
+#  ______   _______   _        _   _        _____   _______
+# /  __  \ |  ___  | | |      | | | |      |  ___| |  ___  |
+# | |  |_| | |___| | | |      | | | |      | |__   | |   | |
+# | | ___  |  ___  | | |      | | | |      |  __|  | |   | |
+# | ||_  | | |   | | | |      | | | |      | |     | |   | |
+# | |__| | | |   | | | |____  | | | |____  | |___  | |___| |
+#  \_____/ |_|   |_| |______| |_| |______| |_____| |_______|
