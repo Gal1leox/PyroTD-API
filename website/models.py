@@ -37,6 +37,24 @@ class Match(db.Model):
     match_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
 
 
+class get_Match(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    host_id = db.Column(db.Integer)
+    winner = db.Column(db.Integer)
+    p1_id = db.Column(db.Integer)
+    p2_id = db.Column(db.Integer)
+    p3_id = db.Column(db.Integer)
+    p4_id = db.Column(db.Integer)
+    p5_id = db.Column(db.Integer)
+    p6_id = db.Column(db.Integer)
+    p1_mmr = db.Column(db.Integer)
+    p2_mmr = db.Column(db.Integer)
+    p3_mmr = db.Column(db.Integer)
+    p4_mmr = db.Column(db.Integer)
+    p5_mmr = db.Column(db.Integer)
+    p6_mmr = db.Column(db.Integer)
+    match_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+
 
 class Player(db.Model):
     id = db.Column(db.Integer, primary_key=True)
