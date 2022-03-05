@@ -42,3 +42,14 @@ def create_database(app):
     if not path.exists("website/" + DB_NAME):
         db.create_all(app=app)
         print("DB created!")
+
+
+
+
+#  ______   _______   _
+# /  __  \ |  ___  | | |
+# | |  |_| | |___| | | | 
+# | | ___  |  ___  | | | 
+# | ||_  | | |   | | | | 
+# | |__| | | |   | | | |____  
+#  \_____/ |_|   |_| |______|

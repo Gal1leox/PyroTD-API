@@ -2,16 +2,37 @@ from flask import Blueprint, request, jsonify
 from flask_login import current_user
 from flask_restful import Api, Resource
 from . import db
-from . models import get_Match
+from . models import get_Match, Player
 
+#Starting MMR
+MMR = 1200
 
 
 apis = Blueprint("apis", __name__)
 
 
+#player look up
+@apis.route('/player', methods=['POST'])
+def player():
+    data = request.get_json()
+    username = data['username']
+    player_exists = Player.query.filter_by(username=username).first()
 
+    if player_exists:
+        myPlayer = Player.query.filter_by(username=username).first()
+        id = myPlayer.id
+        mmr = myPlayer.mmr
+        wins = myPlayer.wins
+        loss = myPlayer.loss
+        return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss,})
+    else:
+        new_player =Player(username=username, mmr=MMR, wins=0, loss=0)
+        db.session.add(new_player)
+        db.session.commit()
+        return jsonify ({'result' : 'new player created'})
+ 
 
-
+#matchload record, uses get_match model to great data
 @apis.route('/matches', methods=['POST'])
 def matches():
     data = request.get_json()
