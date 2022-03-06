@@ -3,6 +3,7 @@ from flask_login import current_user
 from flask_restful import Api, Resource
 from . import db
 from . models import get_Match, Player
+from . functions.discordnotify import discordpost
 
 #Starting MMR
 MMR = 1200
@@ -26,7 +27,7 @@ def player():
         loss = myPlayer.loss
         return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'existing_player'})
     else:
-        new_player =Player(username=username, mmr=MMR, wins=0, loss=0)
+        new_player = Player(username=username, mmr=MMR, wins=0, loss=0)
         db.session.add(new_player)
         db.session.commit()
         myPlayer = Player.query.filter_by(username=username).first()
@@ -37,7 +38,7 @@ def player():
         return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'new_player'})
  
 
-#matchload record, uses get_match model to great data
+#matchload record, uses get_match model to get data
 @apis.route('/matches', methods=['POST'])
 def matches():
     data = request.get_json()
@@ -59,4 +60,5 @@ def matches():
     p1_mmr=p1_mmr, p2_mmr=p2_mmr, p3_mmr=p3_mmr, p4_mmr=p4_mmr, p5_mmr=p5_mmr, p6_mmr=p6_mmr)
     db.session.add(new_match)
     db.session.commit()
+    discordpost(winner, p1_id, p2_id, p3_id)
     return jsonify ({'result' : 'Success'})

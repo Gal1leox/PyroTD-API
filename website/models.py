@@ -10,7 +10,7 @@ class User(db.Model, UserMixin):
     user_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
 
 
-class Match(db.Model):
+class processed_Match(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     host_id = db.Column(db.Integer)
     winner = db.Column(db.Integer)
