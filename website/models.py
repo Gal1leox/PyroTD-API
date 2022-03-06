@@ -47,12 +47,12 @@ class get_Match(db.Model):
     p4_id = db.Column(db.Integer)
     p5_id = db.Column(db.Integer)
     p6_id = db.Column(db.Integer)
-    p1_mmr = db.Column(db.Integer)
-    p2_mmr = db.Column(db.Integer)
-    p3_mmr = db.Column(db.Integer)
-    p4_mmr = db.Column(db.Integer)
-    p5_mmr = db.Column(db.Integer)
-    p6_mmr = db.Column(db.Integer)
+    p1_ban = db.Column(db.Integer)
+    p2_ban = db.Column(db.Integer)
+    p3_ban = db.Column(db.Integer)
+    p4_ban = db.Column(db.Integer)
+    p5_ban = db.Column(db.Integer)
+    p6_ban = db.Column(db.Integer)
     match_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
 
 

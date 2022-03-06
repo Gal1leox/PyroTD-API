@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, flash
 from flask_login import current_user
 from flask_restful import Api, Resource
 from . import db
@@ -25,6 +25,7 @@ def player():
         mmr = myPlayer.mmr
         wins = myPlayer.wins
         loss = myPlayer.loss
+        print('Sucess: Player looked up')
         return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'existing_player'})
     else:
         new_player = Player(username=username, mmr=MMR, wins=0, loss=0)
@@ -35,6 +36,7 @@ def player():
         mmr = myPlayer.mmr
         wins = myPlayer.wins
         loss = myPlayer.loss
+        print('Sucess: New user created')
         return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'new_player'})
  
 
@@ -50,15 +52,16 @@ def matches():
     p4_id = data['p4_id']
     p5_id = data['p5_id']
     p6_id = data['p6_id']
-    p1_mmr = data['p1_mmr']
-    p2_mmr = data['p2_mmr']
-    p3_mmr = data['p3_mmr']
-    p4_mmr = data['p4_mmr']
-    p5_mmr = data['p5_mmr']
-    p6_mmr = data['p6_mmr']
+    p1_ban = data['p1_ban']
+    p2_ban = data['p2_ban']
+    p3_ban = data['p3_ban']
+    p4_ban = data['p4_ban']
+    p5_ban = data['p5_ban']
+    p6_ban = data['p6_ban']
     new_match = get_Match(host_id=host_id, winner=winner, p1_id=p1_id, p2_id=p2_id, p3_id=p3_id, p4_id= p4_id, p5_id=p5_id, p6_id=p6_id, 
-    p1_mmr=p1_mmr, p2_mmr=p2_mmr, p3_mmr=p3_mmr, p4_mmr=p4_mmr, p5_mmr=p5_mmr, p6_mmr=p6_mmr)
+    p1_ban=p1_ban, p2_ban=p2_ban, p3_ban=p3_ban, p4_ban=p4_ban, p5_ban=p5_ban, p6_ban=p6_ban)
     db.session.add(new_match)
     db.session.commit()
     discordpost(winner, p1_id, p2_id, p3_id)
-    return jsonify ({'result' : 'Success'})
+    print("Match imported")
+    return jsonify ({'result' : 'Success', 'match status' : 'imported'})

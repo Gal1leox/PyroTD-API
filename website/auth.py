@@ -4,6 +4,7 @@ from . import db
 from . models import User
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from . functions.player_processing import battlenet_checker
 
 auth = Blueprint("auth", __name__)
 
@@ -42,6 +43,8 @@ def sign_up():
         #new user validation, email, username,password.
         email_exists = User.query.filter_by(email=email).first()
         username_exists = User.query.filter_by(username=username).first()
+        btag_check = battlenet_checker(username)
+
         #for the people that can never remember their email address
         if email_exists:
             flash('This email already exists', category='error')
@@ -49,6 +52,10 @@ def sign_up():
         # for the people who like to make new accounts....
         elif username_exists:
             flash('Username in use.', category='error')
+
+        # looking for # tag found in functions\player_processing
+        elif btag_check:
+            flash('This is not a battletag needs #1234.', category='error')
 
         #for the people who cannot type the same thing twice
         elif password1 != password2:
