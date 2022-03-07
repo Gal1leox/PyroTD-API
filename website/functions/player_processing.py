@@ -40,10 +40,17 @@ def get_mmr(p_id):
 def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
     #create list of players in match
     p_id = [p1_id, p2_id, p3_id, p4_id, p5_id, p6_id]
+
+    i = 0
     mmr = []
+    while i < 6:
+        mmr.append(get_mmr(p_id[i]))
+        i += 1
+
     #change list to MMR's
-    for x in range(len(p_id)):
-        mmr.append(get_mmr(p_id[x]))
+    # for x in range(len(p_id)):
+    #     x = get_mmr(p_id[x])
+    #     mmr.append(x)
 
     #workout totals of each team
     team1 = int(mmr[0]) + int(mmr[1]) + int(mmr[2])

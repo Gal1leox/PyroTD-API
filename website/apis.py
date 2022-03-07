@@ -4,7 +4,7 @@ from flask_restful import Api, Resource
 from . import db
 from . models import get_Match, Player
 from . functions.discordnotify import discord_match_Post
-from . functions.player_processing import get_player_name, get_winners, mmr_logic
+from . functions.player_processing import get_player_name, get_winners, mmr_logic, get_mmr
 #Starting MMR
 MMR = 1200
 
@@ -26,7 +26,7 @@ def player():
         wins = myPlayer.wins
         loss = myPlayer.loss
         print('Sucess: Player looked up')
-        return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'existing_player'})
+        return jsonify({'username' : username, 'ID' : id, 'MMR' : int(mmr), 'Wins' : wins,'Loss' : loss, 'age' : 'existing_player'})
     else:
         new_player = Player(username=username, mmr=MMR, wins=0, loss=0)
         db.session.add(new_player)
@@ -37,7 +37,7 @@ def player():
         wins = myPlayer.wins
         loss = myPlayer.loss
         print('Sucess: New user created')
-        return jsonify({'username' : username, 'ID' : id, 'MMR' : mmr, 'Wins' : wins,'Loss' : loss, 'age' : 'new_player'})
+        return jsonify({'username' : username, 'ID' : id, 'MMR' : int(mmr), 'Wins' : wins,'Loss' : loss, 'age' : 'new_player'})
  
 
 #matchload record, uses get_match model to get data
@@ -81,6 +81,9 @@ def matches():
 @apis.route('/test', methods=['POST'])
 def test():
     data = request.get_json()
+    # p1_id = data['username']
+    # a = get_mmr(p1_id)
+    # print(a)
     host_id = data['host_id']
     t_winner = data['t_winner']
     p1_id = data['p1_id']
