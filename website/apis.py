@@ -81,6 +81,7 @@ def matches():
 @apis.route('/test', methods=['POST'])
 def test():
     data = request.get_json()
+    host_id = data['host_id']
     t_winner = data['t_winner']
     p1_id = data['p1_id']
     p2_id = data['p2_id']
@@ -89,5 +90,5 @@ def test():
     p5_id = data['p5_id']
     p6_id = data['p6_id']
 
-    mmr_logic(t_winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id)
+    mmr_logic(host_id, t_winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id)
     return jsonify ({'result' : 'Success', 'player status' : 'updated'})
