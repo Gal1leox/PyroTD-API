@@ -76,6 +76,7 @@ def matches():
         db.session.add(new_match)
         db.session.commit()
         print("Match imported")
+        mmr_logic(host_id, winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id)
         return jsonify ({'result' : 'Success', 'match status' : 'imported'})
 
 @apis.route('/test', methods=['POST'])

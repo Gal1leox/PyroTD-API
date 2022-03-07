@@ -20,7 +20,6 @@ def get_player_name(p_id):
 
 #to see which players won
 def get_winners(winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
-    print(winner)
     if int(winner) == 1:
         return p1_id, p2_id, p3_id
     
@@ -41,16 +40,14 @@ def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
     #create list of players in match
     p_id = [p1_id, p2_id, p3_id, p4_id, p5_id, p6_id]
 
+
+    #change list to players MMR's
     i = 0
     mmr = []
     while i < 6:
         mmr.append(get_mmr(p_id[i]))
         i += 1
 
-    #change list to MMR's
-    # for x in range(len(p_id)):
-    #     x = get_mmr(p_id[x])
-    #     mmr.append(x)
 
     #workout totals of each team
     team1 = int(mmr[0]) + int(mmr[1]) + int(mmr[2])
@@ -114,7 +111,7 @@ def update_player_Win(p_id, p_mmr):
     update.mmr = update.mmr + p_mmr
     db.session.commit()
 
-    print("Player: " + get_player_name(p_id) + " updated win " + str(p_mmr))
+    print("Player processed: " + get_player_name(p_id) + " updated win " + str(p_mmr))
 
     return "Player updated"
 
@@ -124,6 +121,6 @@ def update_player_Loss(p_id, p_mmr):
     update.mmr = update.mmr - p_mmr
     db.session.commit()
 
-    print("Player: " + get_player_name(p_id) + " updated loss "+ str(p_mmr))
+    print("Player processed: " + get_player_name(p_id) + " updated loss "+ str(p_mmr))
 
     return "Player updated"
