@@ -3,8 +3,8 @@ from flask_login import current_user
 from flask_restful import Api, Resource
 from . import db
 from . models import get_Match, Player
-from . functions.discordnotify import discordpost
-
+from . functions.discordnotify import discord_match_Post
+from . functions.player_processing import get_player_name, get_winners, mmr_logic
 #Starting MMR
 MMR = 1200
 
@@ -60,8 +60,34 @@ def matches():
     p6_ban = data['p6_ban']
     new_match = get_Match(host_id=host_id, winner=winner, p1_id=p1_id, p2_id=p2_id, p3_id=p3_id, p4_id= p4_id, p5_id=p5_id, p6_id=p6_id, 
     p1_ban=p1_ban, p2_ban=p2_ban, p3_ban=p3_ban, p4_ban=p4_ban, p5_ban=p5_ban, p6_ban=p6_ban)
-    db.session.add(new_match)
-    db.session.commit()
-    discordpost(winner, p1_id, p2_id, p3_id)
-    print("Match imported")
-    return jsonify ({'result' : 'Success', 'match status' : 'imported'})
+
+    winner_player = get_winners(winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id)
+
+    if int(winner_player[0]) == 0:
+        print ("error importing match")
+        return jsonify ({'result' : 'Error', 'match status' : 'failed to Import'})
+
+    else:
+    #playername logic to go here
+        p_Name1 = get_player_name(winner_player[0])
+        p_Name2 = get_player_name(winner_player[1])
+        p_Name3 = get_player_name(winner_player[2])
+        discord_match_Post(winner, p_Name1, p_Name2, p_Name3)
+        db.session.add(new_match)
+        db.session.commit()
+        print("Match imported")
+        return jsonify ({'result' : 'Success', 'match status' : 'imported'})
+
+@apis.route('/test', methods=['POST'])
+def test():
+    data = request.get_json()
+    t_winner = data['t_winner']
+    p1_id = data['p1_id']
+    p2_id = data['p2_id']
+    p3_id = data['p3_id']
+    p4_id = data['p4_id']
+    p5_id = data['p5_id']
+    p6_id = data['p6_id']
+
+    mmr_logic(t_winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id)
+    return jsonify ({'result' : 'Success', 'player status' : 'updated'})

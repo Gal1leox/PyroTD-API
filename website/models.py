@@ -64,3 +64,9 @@ class Player(db.Model):
     loss = db.Column(db.Integer)
     icon_id = db.Column(db.Integer)
     player_date_created = db.Column(db.DateTime(timezone=True), default=func.now())
+
+    def __init__(self, username, mmr, wins, loss):
+        self.username = username
+        self.mmr = mmr
+        self.wins = wins
+        self.loss = loss
