@@ -35,7 +35,7 @@ def get_mmr(p_id):
     p_name = Player.query.filter_by(id=p_id).first()
     return p_name.mmr
 
-
+#match logic for
 def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
     #create list of players in match
     p_id = [p1_id, p2_id, p3_id, p4_id, p5_id, p6_id]
@@ -49,7 +49,7 @@ def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
         i += 1
 
 
-    #workout totals of each team
+    #workout totals MMR of each team
     team1 = int(mmr[0]) + int(mmr[1]) + int(mmr[2])
     team2 = int(mmr[3]) + int(mmr[4]) + int(mmr[5])
 
@@ -96,6 +96,7 @@ def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
             update_player_Win(p_id[i],abc)
             i += 1
 
+    #adding new processed match to DB
     new_processed_match = processed_Match(host_id = host_id, winner=t_Winner, p1_id = p1_id, 
     p2_id=p2_id, p3_id=p3_id, p4_id=p4_id, p5_id=p5_id, p6_id=p6_id, p1_mmr = mmr[0], p2_mmr = mmr[1],
     p3_mmr = mmr[2], p4_mmr = mmr[3],p5_mmr = mmr[4], p6_mmr = mmr[5], t1_mmr = team1, t2_mmr = team2, 
@@ -105,6 +106,8 @@ def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
     db.session.commit()
     print("matched processed")
 
+
+#update player when they win
 def update_player_Win(p_id, p_mmr):
     update = Player.query.filter_by(id=p_id).first()
     update.wins = update.wins + 1
@@ -113,8 +116,7 @@ def update_player_Win(p_id, p_mmr):
 
     print("Player processed: " + get_player_name(p_id) + " updated win " + str(p_mmr))
 
-    return "Player updated"
-
+#update player when they lose
 def update_player_Loss(p_id, p_mmr):
     update = Player.query.filter_by(id=p_id).first()
     update.loss = update.loss - 1
@@ -122,5 +124,3 @@ def update_player_Loss(p_id, p_mmr):
     db.session.commit()
 
     print("Player processed: " + get_player_name(p_id) + " updated loss "+ str(p_mmr))
-
-    return "Player updated"
