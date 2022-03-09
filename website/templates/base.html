@@ -20,11 +20,19 @@
       <div class="logo-container">
         <img src="{{url_for('static', filename='images/castle-logo.png')}}" class="logo"/>
       </div>
+      {% if user.is_authenticated %}
+      <h1>
+        <button type="button" class="btn btn-dark btn-lg">{{ player.username }}</button>
+        <button type="button" class="btn btn-primary btn-lg">MMR: {{ player.mmr }}</button>
+        <button type="button" class="btn btn-success btn-lg">W: {{ player.wins }}</button>
+        <button type="button" class="btn btn-danger btn-lg">L: {{ player.loss }}</button>
+        </h1>
+        {% endif %}
       <div class="navbar-links">
         <div class="navbar-nav">
           <a class="navbar-link active" aria-current="page" href="/home">Home</a>
           {% if user.is_authenticated %}
-          <a class="navbar-link active" href="/profile">profile</a>
+          <a class="navbar-link active" href="/profile">{{player.username}}</a>
           <a class="navbar-link active" href="/logout">log out</a>
 
           {% else %}

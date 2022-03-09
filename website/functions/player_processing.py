@@ -1,20 +1,27 @@
-from asyncio.windows_events import NULL
-from . .models import Player, processed_Match
-from .. import db
-#checking for # in battletag
+from . .models import Player, processed_Match, User
+from . .import db
 
 mmr_WinChange = 25
 mmr_LoseChange = 15
 
-
+#checking for # in battletag
 def battlenet_checker(battle_net_tag):
     if "#" not in battle_net_tag:
         return True
 
 #to swap player ID into Battletag
-def get_player_name(p_id):
+def get_user_name(p_id):
     p_name = Player.query.filter_by(id=p_id).first()
     return p_name.username
+
+#from user ID to player info
+def get_player_info(u_id):
+    p_name = User.query.filter_by(id=u_id).first()
+    if p_name is not None:
+        x = p_name.username
+        u_name = Player.query.filter_by(username=x).first()
+        return u_name
+
 
 
 
@@ -40,14 +47,12 @@ def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
     #create list of players in match
     p_id = [p1_id, p2_id, p3_id, p4_id, p5_id, p6_id]
 
-
     #change list to players MMR's
     i = 0
     mmr = []
     while i < 6:
         mmr.append(get_mmr(p_id[i]))
         i += 1
-
 
     #workout totals MMR of each team
     team1 = int(mmr[0]) + int(mmr[1]) + int(mmr[2])
@@ -104,7 +109,7 @@ def mmr_logic(host_id, t_Winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id):
     p4_change = p_mmr_change[3], p5_change = p_mmr_change[4], p6_change = p_mmr_change[5])
     db.session.add(new_processed_match)
     db.session.commit()
-    print("matched processed")
+    print("Matched Processed")
 
 
 #update player when they win
@@ -113,14 +118,14 @@ def update_player_Win(p_id, p_mmr):
     update.wins = update.wins + 1
     update.mmr = update.mmr + p_mmr
     db.session.commit()
-
-    print("Player processed: " + get_player_name(p_id) + " updated win " + str(p_mmr))
+    update.mmr = int(update.mmr)
+    print("Player processed: " + get_user_name(p_id) + " updated win " + str(p_mmr) + " New MMR: " + str(update.mmr))
 
 #update player when they lose
 def update_player_Loss(p_id, p_mmr):
     update = Player.query.filter_by(id=p_id).first()
-    update.loss = update.loss - 1
+    update.loss = update.loss + 1
     update.mmr = update.mmr - p_mmr
     db.session.commit()
-
-    print("Player processed: " + get_player_name(p_id) + " updated loss "+ str(p_mmr))
+    update.mmr = int(update.mmr)
+    print("Player processed: " + get_user_name(p_id) + " updated loss "+ str(p_mmr) + " New MMR: " + str(update.mmr))

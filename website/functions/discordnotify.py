@@ -1,6 +1,6 @@
 import requests #dependency
 
-test_api = "https://discord.com/api/webhooks/950254154562031636/gjnSjfNWlfteibab0q7o4viwSLIZ0ijZFRn4iF6pjvWIJBrLFClzCnL5T8K70SpA-cTo"
+test_api = "https://discord.com/api/webhooks/950641398959472740/MqJPK2l9y9aJ0ZRMMF_8jZQ9g3T3W3scThB6MsCbM4KKa-IHUvuoEAdxA4XSSJW77bzQ"
 
 
 
@@ -11,7 +11,7 @@ def discord_match_Post(winner, p1, p2, p3):
     data = {
         "username" : "Match History",
         "avatar_url" : "https://pyrotdleague.com/wp-content/uploads/2020/07/cropped-castle-logo-2.png",
-         "content" :  " Team " + winner + " is the winner\nPlayers: " + p1 + ", " + p2 + ", " + p3
+         "content" :  " **Team " + winner + "** is the winner\n**Players:** " + p1 + ", " + p2 + ", " + p3
     }
 
 

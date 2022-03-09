@@ -4,7 +4,7 @@ from flask_restful import Api, Resource
 from . import db
 from . models import get_Match, Player
 from . functions.discordnotify import discord_match_Post
-from . functions.player_processing import get_player_name, get_winners, mmr_logic, get_mmr
+from . functions.player_processing import get_user_name, get_winners, mmr_logic, get_mmr, get_player_info
 #Starting MMR
 MMR = 1200
 
@@ -69,9 +69,9 @@ def matches():
 
     else:
     #playername logic to go here
-        p_Name1 = get_player_name(winner_player[0])
-        p_Name2 = get_player_name(winner_player[1])
-        p_Name3 = get_player_name(winner_player[2])
+        p_Name1 = get_user_name(winner_player[0])
+        p_Name2 = get_user_name(winner_player[1])
+        p_Name3 = get_user_name(winner_player[2])
         discord_match_Post(winner, p_Name1, p_Name2, p_Name3)
         db.session.add(new_match)
         db.session.commit()
@@ -96,3 +96,17 @@ def test():
 
     mmr_logic(host_id, t_winner, p1_id, p2_id, p3_id, p4_id, p5_id, p6_id)
     return jsonify ({'result' : 'Success', 'player status' : 'updated'})
+
+@apis.route('/test1', methods=['POST'])
+def test1():
+    data = request.get_json()
+    p1_id = data['p1_id']
+
+    ab = get_player_info(p1_id)
+
+    if ab != None:
+        return jsonify ({'Player Name' : ab.username, 'player mmr' : ab.mmr, 
+        'player wins' : ab.wins, 'player loss' : ab.loss, 'player created' : ab.player_date_created})\
+    
+    else:
+        return jsonify ({'Player Name' : "No records exist"})
