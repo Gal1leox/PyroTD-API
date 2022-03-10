@@ -20,6 +20,7 @@
       <div class="logo-container">
         <img src="{{url_for('static', filename='images/castle-logo.png')}}" class="logo"/>
       </div>
+      <div class="py-2">
       {% if user.is_authenticated %}
       <h1>
         <button type="button" class="btn btn-dark btn-lg">{{ player.username }}</button>
@@ -28,6 +29,7 @@
         <button type="button" class="btn btn-danger btn-lg">L: {{ player.loss }}</button>
         </h1>
         {% endif %}
+      </div>
       <div class="navbar-links">
         <div class="navbar-nav">
           <a class="navbar-link active" aria-current="page" href="/home">Home</a>
