@@ -1,12 +1,14 @@
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+import secrets11
+import pymysql
 from website.__init__ import create_app
-import sys
-import os
-sys.path.append("/opt/python/current/app/MyApp")
 
 
-application = app = create_app()
+application = create_app()
 
 
 if __name__ ==  "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
 
