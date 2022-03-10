@@ -1,12 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_login import LoginManager
 import secrets11
 import pymysql
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
+#DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
