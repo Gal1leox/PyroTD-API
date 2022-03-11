@@ -27,7 +27,7 @@ jobs:
       - name: Create new ElasticBeanstalk Application Version
         run: |
           aws elasticbeanstalk create-application-version \
-          --application-name PyroTD-API \
+          --application-name testing \
           --source-bundle S3Bucket="my-app-pyrotd-api-deploy",S3Key="deploy_package.zip" \
           --version-label "ver-${{ github.sha }}" \
           --description "commit-sha-${{ github.sha }}"
