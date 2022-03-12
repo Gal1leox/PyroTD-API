@@ -1,5 +1,5 @@
-dbhost = 'database-1.cbmedctso1xh.us-east-1.rds.amazonaws.com:3306'
-dbuser = 'admin'
-dbpass = 'pyrotd2022'
-dbname = 'PyroTD'
+dbhost = 'flasktest.cgqbzywbismj.us-east-1.rds.amazonaws.com'
+dbuser = 'flask'
+dbpass = '12345678'
+dbname = 'flasktest'
 
