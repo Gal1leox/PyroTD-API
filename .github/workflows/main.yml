@@ -1,3 +1,11 @@
+# ------------------------------------------------
+# Program by Denis Astahov
+#
+#
+# Version      Date           Info
+# 1.0          13-Dec-2019    Initial Version
+#
+# ----------------------------------------------
 name: CI-CD-Pipeline-to-AWS-ElasticBeastalk
 env:
   EB_PACKAGE_S3_BUCKET_NAME : "my-app-pyrotd-api-deploy"
