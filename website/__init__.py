@@ -10,6 +10,7 @@ def create_app():
     application = Flask(__name__)
     application.config['SECRET_KEY'] = "helloworld"
     application.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    application.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     #application.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{username}:{password}@{server}/PyroTD".format(username=secrets11.dbuser, password=secrets11.dbpass, server=secrets11.dbhost)
     db.init_app(application)
     
@@ -53,3 +54,4 @@ def create_app():
 # | ||_  | | |   | | | |      | | | |      | |     | |   | |
 # | |__| | | |   | | | |____  | | | |____  | |___  | |___| |
 #  \_____/ |_|   |_| |______| |_| |______| |_____| |_______|
+
