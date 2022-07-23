@@ -31,9 +31,9 @@ def player():
 
 @views.route('/leaderboard')
 def leaderboard():
-    leaderboard = Player.query.order_by(desc(Player.mmr))
+    leaderboard_current = Player.query.order_by(desc(Player.mmr))
     if current_user.is_authenticated:
         player = get_player_info(current_user.id)
-        return render_template('leaderboard.html',user=current_user, player=player, value=leaderboard)
+        return render_template('leaderboard.html',user=current_user, player=player, leaderboard=leaderboard_current)
     else:
-        return render_template('leaderboard.html',user=current_user, value=leaderboard)
+        return render_template('leaderboard.html',user=current_user, leaderboard=leaderboard_current)
