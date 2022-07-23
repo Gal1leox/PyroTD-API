@@ -1,7 +1,7 @@
 from pickle import TRUE
 from flask import Blueprint, redirect, render_template, url_for, request, flash
 from . import db
-from . models import User
+from . models import User, Player
 from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from . functions.player_processing import battlenet_checker

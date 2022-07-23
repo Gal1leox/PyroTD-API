@@ -1,0 +1,56 @@
+<style>
+table.customTable {
+  width: 70%;
+  background-color: #FFFFFF;
+  border-collapse: collapse;
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  color: #000000;
+}
+
+table.customTable td, table.customTable th {
+  border-width: 2px;
+  border-color: #000000;
+  border-style: solid;
+  padding: 5px;
+}
+
+table.customTable thead {
+  background-color: #DBDBDB;
+}
+    </style>
+    
+
+{% extends 'base.html' %}
+
+{% block head %} 
+{% endblock %}
+
+{% block body %}
+<h1> 
+Leaderboard
+</h1>
+<table class="customTable"> 
+    <thead> 
+    <tr> 
+        <th>MMR</th> 
+        <th>Username</th> 
+        <th>Wins</th> 
+        <th>Loss</th> 
+    </tr> 
+    </thead> 
+    <tbody> 
+        {% for row in value %}  
+            <tr> 
+                <td>{{row.mmr}}</td> 
+                <td>{{row.username}}</td> 
+                <td>{{row.wins}}</td> 
+                <td>{{row.loss}}</td> 
+            </tr> 
+        {% endfor %} 
+    </tbody> 
+</table> 
+
+
+{% endblock %}

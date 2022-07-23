@@ -1,17 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-import secrets11
-import pymysql
+
 
 db = SQLAlchemy()
-#DB_NAME = "database.db"
+DB_NAME = "database.db"
 
 def create_app():
     application = Flask(__name__)
     application.config['SECRET_KEY'] = "helloworld"
-    #app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    application.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{username}:{password}@{server}/PyroTD".format(username=secrets11.dbuser, password=secrets11.dbpass, server=secrets11.dbhost)
+    application.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+    #application.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://{username}:{password}@{server}/PyroTD".format(username=secrets11.dbuser, password=secrets11.dbpass, server=secrets11.dbhost)
     db.init_app(application)
     
     from .views import views    

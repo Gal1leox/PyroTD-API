@@ -11,7 +11,7 @@ def discord_match_Post(winner, p1, p2, p3):
     data = {
         "username" : "Match History",
         "avatar_url" : "https://pyrotdleague.com/wp-content/uploads/2020/07/cropped-castle-logo-2.png",
-         "content" :  " **Team " + winner + " is the winner\n**Players:** " + p1 + ", " + p2 + ", " + p3
+         "content" :  " **Team " + winner + " is the winner\n Players:** " + p1 + ", " + p2 + ", " + p3
     }
 
 

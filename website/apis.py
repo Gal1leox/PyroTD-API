@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify, flash
 from flask_login import current_user
-from flask_restful import Api, Resource
 from . import db
 from . models import get_Match, Player
 from . functions.discordnotify import discord_match_Post

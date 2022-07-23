@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-import secrets11
-import pymysql
+#import secrets11
 from website.__init__ import create_app
 
 

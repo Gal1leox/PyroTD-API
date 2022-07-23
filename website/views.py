@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, jsonify, session
 from flask_login import login_required, current_user
 from .models import Player 
 from .functions.player_processing import get_user_name, get_player_info
+from sqlalchemy import desc
 
 
 views = Blueprint("views", __name__)
@@ -28,3 +29,11 @@ def player():
     player = get_player_info(current_user.id)
     return render_template('profile.html',user=current_user, player=player)
 
+@views.route('/leaderboard')
+def leaderboard():
+    leaderboard = Player.query.order_by(desc(Player.mmr))
+    if current_user.is_authenticated:
+        player = get_player_info(current_user.id)
+        return render_template('leaderboard.html',user=current_user, player=player, value=leaderboard)
+    else:
+        return render_template('leaderboard.html',user=current_user, value=leaderboard)
