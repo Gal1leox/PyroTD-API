@@ -41,8 +41,9 @@ Leaderboard
     </tr> 
     </thead> 
     <tbody> 
-        {% for row in leaderboard %}  
+        {% for row in leaderboard i=0 i++ %}  
             <tr> 
+                <td>{{i}}</td> 
                 <td>{{row.mmr}}</td> 
                 <td>{{row.username}}</td> 
                 <td>{{row.wins}}</td> 
